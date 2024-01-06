@@ -1,5 +1,5 @@
 const express = require("express");
-const apiRoute = require("./routes/routes");    // importamos el modulo "routes"
+const apiRoute = require("./src/routes/routes");    // importamos el modulo "routes"
 
 const app = express();
 
