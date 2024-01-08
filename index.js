@@ -9,7 +9,6 @@ app.use(express.json());    // express tiene que utilizar 'express.json()' para 
 
 app.use("/whatsapp", apiRoute);     // ruta en donde se ejecutarán las routes
 app.use("/", apiRoute);    // arriba ruta especifica y aca ruta raiz
-app.use("/*", apiRoute);    // ruta cualquiera
 
 app.listen(PORT, () => {
     console.log("LISTENING PORT: "+ PORT);
