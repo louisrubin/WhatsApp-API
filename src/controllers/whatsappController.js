@@ -1,4 +1,5 @@
-// const webpConverter = require("../services/webp") ;
+const fs = require("fs");
+const myConsoleLog = new console.Console(fs.createWriteStream("./logs.txt"));
 require('dotenv').config();     // invoco 'dotenv' instalado en el proyecto para usar .env 
 
 const verifyToken = async (req, res) => {
@@ -19,8 +20,20 @@ const verifyToken = async (req, res) => {
 }
 
 const receivedMessage = async (req, res) => {
-    await webpConverter.produceWebP;
-    res.send("hola receivedMessage");
+    try {
+        let entry = (req.body["entry"])[0];
+        let changes = (entry["changes"])[0];
+        let value = changes["value"];
+        let messageObject = value["messages"];
+
+        myConsoleLog.log(messageObject);
+
+        res.send("EVENT_RECEIVED");
+
+    } catch (error) {        
+        myConsoleLog.log(messageObject);
+        res.send("EVENT_RECEIVED");
+    }
 }
 
 
