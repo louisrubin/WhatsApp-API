@@ -1,5 +1,5 @@
-const fs = require("fs");
-const myConsoleLog = new console.Console(fs.createWriteStream("./logs.txt"));
+// const fs = require("fs");
+//const myConsoleLog = new console.Console(fs.createWriteStream("./logs.txt"));
 require('dotenv').config();     // invoco 'dotenv' instalado en el proyecto para usar .env 
 
 const verifyToken = async (req, res) => {
