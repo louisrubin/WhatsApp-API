@@ -4,7 +4,7 @@ const whatsAppController = require("../controllers/whatsappController");    // i
 
 // endpoints
 router
-.get("/", whatsAppController.veryToken)
+.get("/", whatsAppController.verifyToken)
 .post("/", whatsAppController.receivedMessage)
 
 module.exports = router;    // exportamos las rutas
