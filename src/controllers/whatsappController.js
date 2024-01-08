@@ -1,5 +1,6 @@
 const fs = require("fs");
 const myConsoleLog = new console.Console(fs.createWriteStream("./logs.txt"));
+
 require('dotenv').config();     // invoco 'dotenv' instalado en el proyecto para usar .env 
 
 const verifyToken = async (req, res) => {
@@ -26,7 +27,9 @@ const receivedMessage = async (req, res) => {
         let value = changes["value"];
         let messageObject = value["messages"];
 
-        myConsoleLog.log(messageObject);
+        // myConsoleLog.log(messageObject);
+
+        console.log(messageObject);
 
         res.send("EVENT_RECEIVED");
 
