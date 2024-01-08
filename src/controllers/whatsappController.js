@@ -1,4 +1,4 @@
-const webpConverter = require("../services/webp") ;
+// const webpConverter = require("../services/webp") ;
 require('dotenv').config();     // invoco 'dotenv' instalado en el proyecto para usar .env 
 
 const verifyToken = async (req, res) => {
