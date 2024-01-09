@@ -5,7 +5,7 @@ require('dotenv').config();     // invoco 'dotenv' instalado en el proyecto para
 const verifyToken = async (req, res) => {
     
     try {
-        let accessToken = "AKKIE0200SDAJD939D3AAJD93LLA";    // token hecho manualmente
+        let accessToken = process.env.ACCESS_TOKEN_WHATSAPP;    // token hecho manualmente
         let tokenWhatsapp = req.query["hub.verify_token"];  // token que nos devuelve API Whatsapp
         let challenge = req.query["hub.challenge"]      // API whatsapp nos devuelve un challenge
 
@@ -14,7 +14,8 @@ const verifyToken = async (req, res) => {
         } else {
             res.status(400).send();
         }
-        console.log(process.env.HOLA);
+
+        console.log(process.env.ACCESS_TOKEN_WHATSAPP);
 
     } catch (error) {        
         res.status(400).send();
@@ -29,8 +30,8 @@ const receivedMessage = async (req, res) => {
         let messageObject = value["messages"];
 
         // myConsoleLog.log(messageObject);
-        console.log(process.env.HOLA);
 
+        console.log(process.env.ACCESS_TOKEN_WHATSAPP);
         console.log(messageObject[0]["text"]);       // obtengo la lista 0 de "messages" -> "text"
 
         res.send("EVENT_RECEIVED");
