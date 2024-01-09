@@ -5,7 +5,7 @@ require('dotenv').config();     // invoco 'dotenv' instalado en el proyecto para
 const verifyToken = async (req, res) => {
     
     try {
-        let accessToken = process.env.ACCESS_TOKEN_WHATSAPP;    // token hecho manualmente
+        let accessToken = "AKKIE0200SDAJD939D3AAJD93LLA";    // token hecho manualmente
         let tokenWhatsapp = req.query["hub.verify_token"];  // token que nos devuelve API Whatsapp
         let challenge = req.query["hub.challenge"]      // API whatsapp nos devuelve un challenge
 
@@ -24,11 +24,11 @@ const receivedMessage = async (req, res) => {
         let entry = (req.body["entry"])[0];
         let changes = (entry["changes"])[0];
         let value = changes["value"];
-        let messageObject = value["messages"][0];
+        let messageObject = value["messages"];
 
         // myConsoleLog.log(messageObject);
 
-        console.log(messageObject["text"]);
+        console.log(messageObject[0]["text"]);       // obtengo la lista 0 de "messages" -> "text"
 
         res.send("EVENT_RECEIVED");
 
@@ -37,6 +37,29 @@ const receivedMessage = async (req, res) => {
         res.send("EVENT_RECEIVED");
     }
 }
+/*
+    "messages": [
+        {
+        "from": "51123456789",
+        "id": "wamid.HBgLNTE5NDM2NjI5NjQVAgASGBQzQUNCODUzN0U1QkU5MkZENTFBQwA=",
+        "Timestamp": "1660362642",
+        "type": "text",
+        "text": {
+            "body": "hola ..."
+        },
+        "interactive": null,
+        "image": null,
+        "audio": null,
+        "video": null,
+        "document": null,
+        "sticker": null,
+        "location": null,
+        "contacts": null,
+        "system": null
+        }
+    ],
+
+*/ 
 
 
 module.exports = {
