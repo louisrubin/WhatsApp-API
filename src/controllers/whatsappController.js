@@ -26,7 +26,8 @@ const receivedMessage = (req, res) => {
         let value = changes["value"];
         let messageObject = value["messages"];
 
-        console.log(messageObject[0]["text"]);       // obtengo la lista 0 de "messages" -> "text"
+        //console.log(messageObject[0]["text"]);       // obtengo la lista 0 de "messages" -> "text"
+        getTextUser(messageObject);
 
         res.send("EVENT_RECEIVED");
 
@@ -34,6 +35,17 @@ const receivedMessage = (req, res) => {
         res.send("EVENT_RECEIVED");
     }
 }
+
+function getTextUser(messages) {
+    let text = ""
+    let typeMessage = messages[0]["type"]
+    if (typeMessage == "image") {
+        console.log(messages[0]["image"]);
+    } else {
+        console.log(messages[0]["text"]);
+    }
+}
+
 /*  OBJECT FROM WHATSAPP
     
     "messages": [
