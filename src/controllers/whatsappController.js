@@ -27,7 +27,7 @@ const receivedMessage = (req, res) => {
         let messageObject = value["messages"];
 
         //console.log(messageObject[0]["text"]);       // obtengo la lista 0 de "messages" -> "text"
-        getTextUser(messageObject);
+        getObjectUser(messageObject);
 
         res.send("EVENT_RECEIVED");
 
@@ -36,13 +36,13 @@ const receivedMessage = (req, res) => {
     }
 }
 
-function getTextUser(messages) {
+function getObjectUser(messages) {
     let text = ""
     let typeMessage = messages[0]["type"]
     if (typeMessage == "image") {
         console.log(messages[0]["image"]);
     } else {
-        console.log(messages[0]["text"]);
+        console.log(messages[0][typeMessage]); // else devuelve el objeto "type" del que sea
     }
 }
 
