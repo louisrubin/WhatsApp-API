@@ -14,6 +14,8 @@ const verifyToken = async (req, res) => {
         } else {
             res.status(400).send();
         }
+        console.log(process.env.HOLA);
+
     } catch (error) {        
         res.status(400).send();
     }
@@ -27,6 +29,7 @@ const receivedMessage = async (req, res) => {
         let messageObject = value["messages"];
 
         // myConsoleLog.log(messageObject);
+        console.log(process.env.HOLA);
 
         console.log(messageObject[0]["text"]);       // obtengo la lista 0 de "messages" -> "text"
 
