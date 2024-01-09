@@ -1,9 +1,7 @@
-// const fs = require("fs");
-//const myConsoleLog = new console.Console(fs.createWriteStream("./logs.txt"));
 require('dotenv').config();     // invoco 'dotenv' instalado en el proyecto para usar .env 
 
-const verifyToken = async (req, res) => {
-    
+const verifyToken = (req, res) => {
+    // GET
     try {
         let accessToken = process.env.ACCESS_TOKEN_WHATSAPP;    // token hecho manualmente
         let tokenWhatsapp = req.query["hub.verify_token"];  // token que nos devuelve API Whatsapp
@@ -15,33 +13,29 @@ const verifyToken = async (req, res) => {
             res.status(400).send();
         }
 
-        console.log(process.env.ACCESS_TOKEN_WHATSAPP);
-
     } catch (error) {        
         res.status(400).send();
     }
 }
 
-const receivedMessage = async (req, res) => {
+const receivedMessage = (req, res) => {
+    // POST
     try {
         let entry = (req.body["entry"])[0];
         let changes = (entry["changes"])[0];
         let value = changes["value"];
         let messageObject = value["messages"];
 
-        // myConsoleLog.log(messageObject);
-
-        console.log(process.env.ACCESS_TOKEN_WHATSAPP);
         console.log(messageObject[0]["text"]);       // obtengo la lista 0 de "messages" -> "text"
 
         res.send("EVENT_RECEIVED");
 
     } catch (error) {        
-        //console.log(messageObject);
         res.send("EVENT_RECEIVED");
     }
 }
-/*
+/*  OBJECT FROM WHATSAPP
+    
     "messages": [
         {
         "from": "51123456789",
