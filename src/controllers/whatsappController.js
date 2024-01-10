@@ -1,4 +1,5 @@
 require('dotenv').config();     // invoco 'dotenv' instalado en el proyecto para usar .env 
+const whatsappService = require("../services/whatsappService")
 
 const verifyToken = (req, res) => {
     // GET
@@ -26,9 +27,13 @@ const receivedMessage = (req, res) => {
         let value = changes["value"];
         let messageObject = value["messages"];
 
-        if (messageObject != "undefined") {         // whatsapp devuelve varios eventos no solo un mensaje
+        if (typeof messageObject != "undefined") {         // whatsapp devuelve varios eventos no solo un mensaje
             let text = getTextUser(messageObject);
+            let userNumber = messageObject[0]["from"];      // numero del usuario
+
             console.log(text);
+
+            whatsappService.sendMessageWhatsapp("user: " + text, userNumber);    // funcion enviar mensaje
         }
         
 
