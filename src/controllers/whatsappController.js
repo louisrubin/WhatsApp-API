@@ -27,7 +27,7 @@ const receivedMessage = (req, res) => {
         let value = changes["value"];
         let messageObject = value["messages"];
 
-        if (typeof messageObject != "undefined") {         // whatsapp devuelve varios eventos no solo un mensaje
+        if (messageObject != "undefined") {         // whatsapp devuelve varios eventos no solo un mensaje
             let userText = getTextUser(messageObject);
             let userNumber = messageObject[0]["from"];      // numero del usuario
 

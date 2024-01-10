@@ -2,6 +2,8 @@ const https = require("https");
 require('dotenv').config();
 
 function sendMessageWhatsapp(textReponse, userNumber){
+    const bearerToken = "Bearer " + procces.env.BEARER_TOKEN;
+
     const data = JSON.stringify(
         {
         "messaging_product": "whatsapp",
@@ -9,7 +11,7 @@ function sendMessageWhatsapp(textReponse, userNumber){
         "to": userNumber,
         "type": "text",
         "text": {
-            "body": "user: " + textReponse
+            "body": textReponse
         }
         })
 
@@ -20,13 +22,13 @@ function sendMessageWhatsapp(textReponse, userNumber){
         body: data,
         headers: {
             "Content-type": "application/json",
-            Authorization: "Bearer " + procces.env.BEARER_TOKEN
+            Authorization: bearerToken
         },
     }
 
     const req = https.request(options, res => {
-        res.on("data", data => {
-            process.stdout.write(data);
+        res.on("data", dat => {
+            process.stdout.write(dat);
         });
     })
 
