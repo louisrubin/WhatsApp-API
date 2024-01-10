@@ -28,12 +28,12 @@ const receivedMessage = (req, res) => {
         let messageObject = value["messages"];
 
         if (typeof messageObject != "undefined") {         // whatsapp devuelve varios eventos no solo un mensaje
-            let text = getTextUser(messageObject);
+            let userText = getTextUser(messageObject);
             let userNumber = messageObject[0]["from"];      // numero del usuario
 
-            console.log(text);
+            console.log(userText);
 
-            whatsappService.sendMessageWhatsapp("user: " + text, userNumber);    // funcion enviar mensaje
+            whatsappService.sendMessageWhatsapp(userText, userNumber);    // funcion enviar mensaje
         }
         
 

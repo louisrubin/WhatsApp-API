@@ -7,9 +7,9 @@ function sendMessageWhatsapp(textReponse, userNumber){
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
         "to": userNumber,
-        "type": "image",
-        "image": {
-            "link": "https://i.pinimg.com/originals/0a/bb/e5/0abbe546e479edc1eb62f5a8ccd66328.jpg"
+        "type": "text",
+        "text": {
+            "body": "user: " + textReponse
         }
         })
 
