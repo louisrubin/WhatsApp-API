@@ -6,7 +6,11 @@ const verifyToken = (req, res) => {
     try {
         let accessToken = process.env.ACCESS_TOKEN_WHATSAPP;    // token hecho manualmente
         let tokenWhatsapp = req.query["hub.verify_token"];  // token que nos devuelve API Whatsapp
-        let challenge = req.query["hub.challenge"]      // API whatsapp nos devuelve un challenge
+        let challenge = req.query["hub.challenge"];      // API whatsapp nos devuelve un challenge
+
+        console.log(accessToken);
+        console.log(tokenWhatsapp);
+        console.log(challenge);
 
         if (challenge != null && tokenWhatsapp != null && tokenWhatsapp == accessToken) {
             res.send(challenge);        // le devolvemos el challenge si todo es correcto
