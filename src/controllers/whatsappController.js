@@ -26,8 +26,11 @@ const receivedMessage = (req, res) => {
         let value = changes["value"];
         let messageObject = value["messages"];
 
-        //console.log(messageObject[0]["text"]);       // obtengo la lista 0 de "messages" -> "text"
-        getObjectUser(messageObject);
+        if (messageObject != "undefined") {         // whatsapp devuelve varios eventos no solo un mensaje
+            let text = getTextUser(messageObject);
+            console.log(text);
+        }
+        
 
         res.send("EVENT_RECEIVED");
 
@@ -36,14 +39,33 @@ const receivedMessage = (req, res) => {
     }
 }
 
-function getObjectUser(messages) {
+function getTextUser(messages) {
+    // DEVUELVE SOLO EL MENSAJE ENVIADO POR EL USUARIO 
     let text = ""
     let typeMessage = messages[0]["type"]
-    if (typeMessage == "image") {
-        console.log(messages[0]["image"]);
-    } else {
-        console.log(messages[0][typeMessage]); // else devuelve el objeto "type" del que sea
+
+    if (typeMessage == "text") {                // TEXT
+        text = messages[0]["text"]["body"]
     }
+    else if (typeMessage == "interactive") {                // INTERACTIVE
+        let interactiveObject = messages[0]["interactive"]
+        let typeInteractive = interactiveObject["type"]     // tipo: button, list
+
+        if (typeInteractive == "button_reply") {            // INTERACTIVE BUTTON
+            text = interactiveObject["button_reply"]["title"]
+
+        } else if (typeInteractive == "list_reply") {           // INTERACTIVE LIST
+            text = interactiveObject["list_reply"]["title"]
+            
+        } else {
+            console.log("Sin mensaje 1");
+        }
+    }
+    else {
+        console.log("Sin mensaje 2");
+    }
+
+    return text;
 }
 
 /*  OBJECT FROM WHATSAPP
